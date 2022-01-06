@@ -23,13 +23,17 @@ app.post("/send_problem", (req, res) => {
 
   const data = req.body;
 
-  fetch("http://172.17.0.1:8081/add_problem", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(data), // body data type must match "Content-Type" header
-  });
+  try {
+    fetch("http://172.17.0.1:8081/add_problem", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+  } catch (e) {
+    console.log("ERROR MAPPY OS: " + e);
+  }
 
   console.log("USER PROBLEM: " + data);
 });
@@ -51,13 +55,17 @@ app.get("/holst_image/:folder/:name", (req, res) => {
 app.get("/get_preview_images", async (req, res) => {
   const images = [];
 
-  await fsPromises
-    .readdir(path.resolve("holst_images/preview/"))
-    .then((fileNames) => {
-      fileNames.forEach((file) => {
-        images.push("http://188.138.69.104:8080/holst_image/preview/" + file);
+  try {
+    await fsPromises
+      .readdir(path.resolve("holst_images/preview/"))
+      .then((fileNames) => {
+        fileNames.forEach((file) => {
+          images.push("http://188.138.69.104:8080/holst_image/preview/" + file);
+        });
       });
-    });
+  } catch (e) {
+    console.log("ERROR MAPPY OS: " + e);
+  }
 
   res.status(200).type("text/plain");
   res.json(images);

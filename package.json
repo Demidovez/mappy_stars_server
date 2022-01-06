@@ -1,9 +1,9 @@
 {
-  "name": "mappyos",
+  "name": "mappy_stars_server",
   "version": "1.0.0",
   "main": "app.js",
   "type": "module",
-  "repository": "https://github.com/Demidovez/mappyos.git",
+  "repository": "https://github.com/Demidovez/mappy_stars_server.git",
   "author": "Demidovez <nikolaydemidovez@gmail.com>",
   "license": "MIT",
   "scripts": {
