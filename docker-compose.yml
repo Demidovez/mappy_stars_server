@@ -1,6 +1,17 @@
 version: "3"
 
 services:
+  nginx:
+    image: nginx:alpine
+    container_name: nginx
+    restart: unless-stopped
+    ports:
+      - "8090:80"
+    volumes:
+      - ./holst_images:/var/www/holst_images
+      - ./nginx.conf:/etc/nginx/conf.d/app.conf
+    networks:
+      - app-network
   nodejs:
     build:
       context: .

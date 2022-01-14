@@ -51,6 +51,17 @@ app.get("/holst_image/:folder/:name", (req, res) => {
   res.sendFile(filepath);
 });
 
+// Достаем одно изображение
+app.get("/base64", (req, res) => {
+  let base64Raw = fs.readFileSync("1.json");
+  let base64Json = JSON.parse(base64Raw);
+
+  const base64 = base64Json.data;
+
+  res.status(200).type("text/plain");
+  res.json(base64);
+});
+
 // Достаем список всех превью изображений
 app.get("/get_preview_images", async (req, res) => {
   const images = [];
